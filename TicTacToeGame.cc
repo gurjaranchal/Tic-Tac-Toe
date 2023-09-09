@@ -21,17 +21,17 @@ public:
     void initializeGame() {
         // Creating 2 Players
         players.clear();
-        PlayingPieceX* crossPiece;
+        PlayingPieceX crossPiece;
         Player player1("Player1", crossPiece);
 
-        PlayingPieceO* noughtsPiece;
+        PlayingPieceO noughtsPiece;
         Player player2("Player2", noughtsPiece);
 
         players.push_back(player1);
         players.push_back(player2);
     }
 
-    string startGame() {
+    void startGame() {
         bool noWinner = true;
         while (noWinner) {
             // Take out the player whose turn it is and also put the player back in the queue
@@ -49,7 +49,6 @@ public:
             cout << "Player: " << playerTurn.getName() << " Enter row and column: ";
             int inputRow, inputColumn;
             cin >> inputRow >> inputColumn;
-            cout<<inputRow << " " << inputColumn<<endl;
 
             // Place the piece
             bool pieceAddedSuccessfully = gameBoard->addPiece(inputRow, inputColumn, playerTurn.getPlayingPiece());
@@ -60,14 +59,14 @@ public:
                 continue;
             }
             players.push_back(playerTurn);
-
-            bool winner = isThereWinner(inputRow, inputColumn, playerTurn.getPlayingPiece()->pieceType);
+            bool winner = isThereWinner(inputRow, inputColumn, playerTurn.getPlayingPiece().pieceType);
             if (winner) {
-                return playerTurn.getName();
+                cout<<"Game Winner is: "<<playerTurn.getName();
+                return;
             }
         }
 
-        return "tie";
+        cout<<"Game Tie!!! ";
     }
 
     bool isThereWinner(int row, int column, PieceType pieceType) {
@@ -76,30 +75,37 @@ public:
         bool diagonalMatch = true;
         bool antiDiagonalMatch = true;
 
+        char player;
+        if(pieceType == PieceType::X){
+            player='X';
+        }else {
+            player ='O';
+        }
+
         // Need to check in row
         for (int i = 0; i < 3; i++) {
-            if (gameBoard->board[row][i] == nullptr || gameBoard->board[row][i]->pieceType != pieceType) {
+            if (gameBoard->board[row][i] == ' ' || gameBoard->board[row][i] != player) {
                 rowMatch = false;
             }
         }
 
         // Need to check in column
         for (int i = 0; i < 3; i++) {
-            if (gameBoard->board[i][column] == nullptr || gameBoard->board[i][column]->pieceType != pieceType) {
+            if (gameBoard->board[i][column] == ' ' || gameBoard->board[i][column] != player) {
                 columnMatch = false;
             }
         }
 
         // Need to check forward diagonals
         for (int i = 0, j = 0; i < 3; i++, j++) {
-            if (gameBoard->board[i][j] == nullptr || gameBoard->board[i][j]->pieceType != pieceType) {
+            if (gameBoard->board[i][j] == ' '|| gameBoard->board[i][j] !=player) {
                 diagonalMatch = false;
             }
         }
 
         // Need to check backward diagonals
         for (int i = 0, j = 2; i < 3; i++, j--) {
-            if (gameBoard->board[i][j] == nullptr || gameBoard->board[i][j]->pieceType!= pieceType) {
+            if (gameBoard->board[i][j] == ' ' || gameBoard->board[i][j] != player) {
                 antiDiagonalMatch = false;
             }
         }

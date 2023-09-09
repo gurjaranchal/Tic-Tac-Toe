@@ -5,7 +5,6 @@ using namespace std;
 int main() { 
     TicTacToeGame* game = new TicTacToeGame();
     game->initializeGame();
-    cout<< game->startGame() << std::endl;
-    cout << "Game winner is: " <<endl;
+    game->startGame();
     return 0;
 }

@@ -5,9 +5,9 @@ using namespace std;
 class Player {
 public:
     string name;
-    PlayingPiece* playingPiece;
+    PlayingPiece playingPiece;
 
-    Player(const string& name, PlayingPiece* playingPiece) : name(name), playingPiece(playingPiece) {}
+    Player(const string& name, PlayingPiece playingPiece) : name(name), playingPiece(playingPiece) {}
 
     string getName() const {
         return name;
@@ -17,12 +17,11 @@ public:
         name = newName;
     }
 
-    PlayingPiece* getPlayingPiece() const{
-        cout<<"getPieceType in Playing: "<<endl;
+    PlayingPiece getPlayingPiece() const{
         return playingPiece;
     }
 
-    void setPlayingPiece(PlayingPiece* newPlayingPiece) {
+    void setPlayingPiece(PlayingPiece newPlayingPiece) {
         playingPiece = newPlayingPiece;
     }
 };

@@ -1,6 +1,5 @@
 #include "PieceType.cc" // Assuming you have a PieceType class or enum
 #pragma once
-using namespace std;
 
 class PlayingPiece {
 public:
