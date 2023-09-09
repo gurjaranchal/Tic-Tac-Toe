@@ -41,15 +41,15 @@ public:
             for (int j = 0; j < size; j++) {
                 if (board[i][j] != nullptr) {
                     if(board[i][j]->pieceType == PieceType::X)
-                    std::cout << "X" << "   ";
+                    cout << "X" << "   ";
                     else 
-                    std::cout << "O" << "   ";
+                    cout << "O" << "   ";
                 } else {
-                    std::cout << "    ";
+                    cout << "    ";
                 }
-                std::cout << " | ";
+                cout << " | ";
             }
-            std::cout << std::endl;
+            cout << endl;
         }
     }
 };
